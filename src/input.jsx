@@ -20,7 +20,7 @@ function InputPicture(){
     return (
         <>
      <h1>Input Picture</h1>
-      <input type="text" ref={pictureNameRef}></input>
+      <input type="file" ref={pictureNameRef}></input>
       <button onClick={handlePicture}>写真を追加</button>
       <ul>
         {pictures.map((picture) => (
