@@ -2,32 +2,53 @@ import { useState,useRef } from 'react'
 import React from "react"
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { Link } from 'react-router-dom'
-
+import OutputMusic from "./output.jsx"
+import { useNavigate } from 'react-router-dom';
+import { BrowserRouter , Route, Routes, Link} from 'react-router-dom';
 
 function InputPicture(){
-    const[pictures,setPictures]=useState([{id:1,name:"picture1"},]);
+    const[selectedFile,setSelectedFile]=useState(null);
     
-    const pictureNameRef=useRef()
+    const pictureFileRef=useRef()
+
+    const navigate = useNavigate();
+
+    const handleGoOutputMusic = () => {
+      navigate('/output'); // ボタンをクリックしたときに /page2 へナビゲート
+    };
 
     const handlePicture=()=>{
-        const pictureName=pictureNameRef.current.value;
-        setPictures((prevPictures)=>{
-            return [...prevPictures, {id:"1", name: pictureName}];
-        });
-        pictureNameRef.current.value=null;
+
+        handleGoOutputMusic()
+    }
+
+    const handleFileInputChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setSelectedFile(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+
+
     }
     return (
         <>
      <h1>Input Picture</h1>
-      <input type="file" ref={pictureNameRef}></input>
+      <input 
+      type="file"  
+      accept='image/*' 
+      ref={pictureFileRef}
+      onChange={handleFileInputChange}
+      ></input>
       <button onClick={handlePicture}>写真を追加</button>
-      <ul>
-        {pictures.map((picture) => (
-          <li key={picture.id}>{picture.name}</li>
-        ))}
-      </ul>
- 
+
+      <img src={selectedFile} alt="Preview" style={{ maxWidth: '100%' }} />
+      <Routes>
+        <Route path="/output" element={OutputMusic()} />
+      </Routes>
         </>
     )
 }
