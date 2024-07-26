@@ -1,10 +1,8 @@
 import { useState,useRef } from 'react'
 import React from "react"
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import OutputMusic from "./output.jsx"
 import { useNavigate } from 'react-router-dom';
-import { BrowserRouter , Route, Routes, Link} from 'react-router-dom';
+import {  Route, Routes} from 'react-router-dom';
 
 function InputPicture(){
     const[selectedFile,setSelectedFile]=useState(null);
