@@ -77,6 +77,7 @@ const OutputMusic = ({ handleGoHome, handleGoInputPicture }) => {
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
     }}>
       <h1>Output Music</h1>
+      <biv className="mb5"></biv>
       <button 
         className={`play-button ${isPlaying ? 'playing' : 'paused'}`} 
         onClick={togglePlayPause}
@@ -84,6 +85,7 @@ const OutputMusic = ({ handleGoHome, handleGoInputPicture }) => {
         <i className={`fas ${isPlaying ? 'fa-circle-stop' : 'fa-circle'} play-button-background`}></i>
         <i className={`fas ${isPlaying ? 'fa-stop' : 'fa-play'} play-button-overlay`}></i>
       </button>
+      <biv className="mb5"></biv>
       <div className="button-container">
         <button onClick={handleGoInputPicture}>もう一度</button>
         <button onClick={handleGoHome}>終わる</button>

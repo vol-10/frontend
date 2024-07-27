@@ -176,9 +176,9 @@ button:focus-visible {
   color: #070707;
 }
 
-/*.play-button.paused {
-   一時停止中のスタイル 
-}*/
+.mb5 {
+  margin-bottom: 10em;
+}
 
 .play-button-background {
   font-size: 20rem; /* 背景アイコンのサイズ */
