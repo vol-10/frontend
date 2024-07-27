@@ -69,7 +69,7 @@ function InputPicture(){
 
     }
     const handleGoOutputMusic = () => {
-      navigate('/output'); // ボタンをクリックしたときに /page2 へナビゲート
+      navigate('/output/:filename'); // ボタンをクリックしたときに /page2 へナビゲート
     };
 
     const handleStartCamera = () => {
