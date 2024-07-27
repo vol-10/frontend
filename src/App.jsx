@@ -33,7 +33,7 @@ function App() {
         handleGoOutputMusic={handleGoOutputMusic} 
       />} />
         
-      <Route path="/output" element={<OutputMusic 
+      <Route path="/output/:filename" element={<OutputMusic 
         handleGoHome={handleGoHome} 
         handleGoInputPicture={handleGoInputPicture} 
       />} />
