@@ -19,7 +19,7 @@ const InputPicture = ({ handleGoOutputMusic }) => {
 
   return (
     <div style={{ 
-      backgroundImage: `url(${inputBackGround})`,
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${inputBackGround})`,
       height: '100vh',
       width: '100vw',
       backgroundSize: 'cover',
@@ -37,20 +37,21 @@ const InputPicture = ({ handleGoOutputMusic }) => {
     }}>
     
       <h1>Input Picture</h1>
+
+      <button onClick={handleGoOutputMusic} disabled={!selectedFile}>写真を追加</button>
+      <div className={`image-preview-container ${selectedFile ? 'image-selected' : ''}`}>
+        {selectedFile ? (
+          <img src={selectedFile} alt="Preview" className="image-preview" />
+        ) : (
+          <p></p>
+        )}
+      </div>
       <input 
         type="file" 
         accept="image/*" 
         ref={pictureFileRef}
         onChange={handleFileInputChange}
       />
-      <button onClick={handleGoOutputMusic} disabled={!selectedFile}>写真を追加</button>
-      <div className={`image-preview-container ${selectedFile ? 'image-selected' : ''}`}>
-        {selectedFile ? (
-          <img src={selectedFile} alt="Preview" className="image-preview" />
-        ) : (
-          <p>画像を選択してください</p>
-        )}
-      </div>
     </div>
   );
 };

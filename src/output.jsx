@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import React from 'react';
 import outputBackGround from "./img/output.png";
+import './App.css'
 const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
   const [musics, setMusic] = useState([{ id: 1, name: 'music1' }]);
   const musicNameRef = useRef();
@@ -16,7 +17,7 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
 
   return (
     <div style={{ 
-      backgroundImage: `url(${outputBackGround})`,
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${outputBackGround})`,
       height: '100vh',
       width: '100vw',
       backgroundSize: 'cover',
@@ -34,14 +35,21 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
     }}>
 
       <h1>Output Music</h1>
-      <input type="text" ref={musicNameRef}></input>
-      <button onClick={handleMusic}>音楽が流れる</button>
-      <button onClick={handleGoHome}>Go to Home</button>
-      <button onClick={handleGoInputPicture}>Go to Input</button>
+     
+      <button className="play-button" onClick={handleMusic}>
+      <i className="fas fa-circle-play"></i></button>
+
+      <br/>
+      <br/>
+      <br/>
+
+      <div className="button-container">
+      <button onClick={handleGoInputPicture}>もう一度</button>
+        <button onClick={handleGoHome}>終わる</button>
+
+      </div>
       <ul>
-        {musics.map((music) => (
-          <li key={music.id}>{music.name}</li>
-        ))}
+
       </ul>
     </div>
   );

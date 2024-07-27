@@ -37,41 +37,12 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-  margin: 0.5em; /* ボタンの間に余白を追加 */
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+
+
 .image-preview-container {
-  width: 300px; /* 適当な幅を指定します */
-  height: 300px; /* 適当な高さを指定します */
+  width: 600px; /* 適当な幅を指定します */
+  height: 600px; /* 適当な高さを指定します */
   border: 2px solid #ccc; /* 枠を追加します */
   display: flex;
   justify-content: center;
@@ -87,4 +58,144 @@ button:focus-visible {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain; /* 枠内に収まるように画像を調整します */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* ボタン間の余白を追加 */
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  border: none;
+  outline: none;
+  
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+
+/* ボタンのスタイル */
+.buttonNeumorphism {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  aspect-ratio: 1;
+  color: #222;
+  background-color: #efefef;
+  border-radius: 50%;
+  box-shadow: -4px -4px 8px #fff, 4px 4px 8px rgb(0 0 0 / 24%);
+}
+
+
+/* アイコンのスタイル */
+.circle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: #efefef;
+  border-radius: 50%;
+
+  position: relative;
+}
+
+.circle-button::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 40px solid #222;
+  border-top: 24px solid transparent;
+  border-bottom: 24px solid transparent;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+}
+
+@media (any-hover: hover) {
+  .circle-button {
+    transition: box-shadow 0.2s;
+  }
+
+  .circle-button:hover {
+
+    box-shadow: -2px -2px 4px #fff, 2px 2px 4px rgb(0 0 0 / 24%);
+  }
+
+
+  .circle-button:active {
+    background-color: #ebebeb;
+    box-shadow: inset 4px 4px 8px rgb(0 0 0 / 16%);
+  }
+}
+
+.play-button {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 10rem; /* アイコンのサイズを調整 */
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* 円形にする */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button::before {
+  content: '';
+  position: absolute;
+  width: 100px; /* 中央の円のサイズを調整 */
+  height: 100px;
+  background-color: #131111; /* 中央の円の色を設定 */
+
+  z-index: -1; /* アイコンの後ろに配置 */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+  .buttonNeumorphism {
+    transition: box-shadow 0.2s;
+  }
+
+  .buttonNeumorphism:hover {
+    box-shadow: -2px -2px 4px #fff, 2px 2px 4px rgb(0 0 0 / 24%);
+  }
+
+  .buttonNeumorphism:active {
+    background-color: #ebebeb;
+    box-shadow: inset 4px 4px 8px rgb(0 0 0 / 16%);
+  }
+
+  
 }
