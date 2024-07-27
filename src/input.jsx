@@ -1,5 +1,6 @@
 import { useState,useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
+import inputBackGround from "./img/input.png";
 
 function InputPicture(){
     const[selectedFile,setSelectedFile]=useState(null);
@@ -46,6 +47,24 @@ function InputPicture(){
     }
     return (
         <>
+    <div style={{ 
+      backgroundImage: `url(${inputBackGround})`,
+      height: '100vh',
+      width: '100vw',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 0,
+      padding: 0,
+      boxSizing: 'border-box',
+      color: '#fff',
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
+    }}>
+    
      <h1>Input Picture</h1>
      <form onSubmit={handlePicture} encType='multipart/form-data'>
       <input 
@@ -59,8 +78,8 @@ function InputPicture(){
 
       <div
       style={{
-        width: "100%",
-        height: "180px",
+        width: "600px",
+        height: "400px",
         border: "2px dashed #000",
         display: "flex",
         justifyContent: "center",
@@ -68,11 +87,13 @@ function InputPicture(){
         cursor: "pointer",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        marginBottom: "20px",
         backgroundImage: formDataURL ? `url(${formDataURL})` : "none"}}>
         previewの表示
       </div>
-        </>
-    )
+    </div>
+    </>
+  );
 }
 
 export default InputPicture;
