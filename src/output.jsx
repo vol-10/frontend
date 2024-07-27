@@ -1,12 +1,32 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import outputBackGround from "./img/output.png";
+import { useParams } from 'react-router-dom';
+
 import './App.css'
 const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
+  const { filename } = useParams();
+  const [emotion, setEmotion] = useState(null);
   const [musics, setMusic] = useState([{ id: 1, name: 'music1' }]);
   const [isPlaying, setIsPlaying] = useState(false); // アイコンの状態を管理するためのステート
   const musicNameRef = useRef();
 
+  useEffect(() => {
+    const fetchEmotion = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/classify/${filename}`);
+        const data = await response.json();
+        if (response.ok) {
+          setEmotion(data.emotion);
+        } else {
+          console.error(data.error);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+    fetchEmotion();
+  }, [filename]);
   const handleMusic = () => {
     const musicName = musicNameRef.current.value;
     if (musicName.trim() === '') return; // 空の入力を防ぐ
@@ -72,6 +92,7 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
       <ul>
 
       </ul>
+      {emotion ? <p>Detected Emotion: {emotion}</p> : <p>Loading...</p>}
     </div>
   );
 }

@@ -23,7 +23,7 @@ function InputPicture(){
           });
           const data = await response.json();
           console.log(data);
-          navigate('/output');
+          navigate(`/output/${data.filename}`);
         } catch (error) {
           console.error('Error uploading the file', error);
         }
