@@ -24,20 +24,24 @@ function App() {
   };
 
   return (
-    <>
-      <div>
-      <button onClick={handleGoHome}>Go to Home</button>
-      <button onClick={handleGoInputPicture}>Go to Input</button>
-      <button onClick={handleGoOutputMusic}>Go to Output</button>
-      </div>
+    
+
 
       <Routes>
-      <Route path={"/"} element={<Home />}/>
-        <Route path="/input" element={InputPicture()} />
-        <Route path="/output" element={OutputMusic()} />
+      <Route path="/" element={<Home 
+        handleGoInputPicture={handleGoInputPicture} 
+        handleGoOutputMusic={handleGoOutputMusic} 
+      />} />
+        
+      <Route path="/output" element={<OutputMusic 
+        handleGoHome={handleGoHome} 
+        handleGoInputPicture={handleGoInputPicture} 
+      />} />
+      <Route path="/input" element={<InputPicture
+       handleGoOutputMusic={handleGoOutputMusic} 
+      />} />
       </Routes>
 
-    </>
   )
 }
 
