@@ -1,23 +1,52 @@
-import { useState, useRef } from 'react';
-import React from 'react';
+import { useState,useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 import inputBackGround from "./img/input.png";
 
-const InputPicture = ({ handleGoOutputMusic }) => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const pictureFileRef = useRef();
+function InputPicture(){
+    const[selectedFile,setSelectedFile]=useState(null);
+    const [formDataURL,setFormDataURL] = useState(null);
+    
+    const pictureFileRef=useRef()
 
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedFile(reader.result);
-      };
-      reader.readAsDataURL(file);
+    const navigate = useNavigate();
+
+
+    const handlePicture = async (e) =>{
+      e.preventDefault();
+      if (selectedFile) {
+        const formData = new FormData();
+        formData.append('picture', selectedFile);
+        try {
+          const response = await fetch('http://127.0.0.1:5000/images', {
+            method: 'POST',
+            body: formData
+          });
+          const data = await response.json();
+          console.log(data);
+          navigate('/output');
+        } catch (error) {
+          console.error('Error uploading the file', error);
+        }
+      } else {
+        console.log('No file selected');
+      }
     }
-  };
 
-  return (
+    const handleFileInputChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setFormDataURL(reader.result);
+          setSelectedFile(file);
+        };
+        reader.readAsDataURL(file);
+      }
+
+
+    }
+    return (
+        <>
     <div style={{ 
       backgroundImage: `url(${inputBackGround})`,
       height: '100vh',
@@ -36,23 +65,35 @@ const InputPicture = ({ handleGoOutputMusic }) => {
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
     }}>
     
-      <h1>Input Picture</h1>
+     <h1>Input Picture</h1>
+     <form onSubmit={handlePicture} encType='multipart/form-data'>
       <input 
-        type="file" 
-        accept="image/*" 
-        ref={pictureFileRef}
-        onChange={handleFileInputChange}
-      />
-      <button onClick={handleGoOutputMusic} disabled={!selectedFile}>写真を追加</button>
-      <div className={`image-preview-container ${selectedFile ? 'image-selected' : ''}`}>
-        {selectedFile ? (
-          <img src={selectedFile} alt="Preview" className="image-preview" />
-        ) : (
-          <p>画像を選択してください</p>
-        )}
+      type="file"  
+      accept='image/*' 
+      ref={pictureFileRef}
+      onChange={handleFileInputChange}
+      ></input>
+      <button type='submit'>写真を追加</button>
+      </form>
+
+      <div
+      style={{
+        width: "600px",
+        height: "400px",
+        border: "2px dashed #000",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        marginBottom: "20px",
+        backgroundImage: formDataURL ? `url(${formDataURL})` : "none"}}>
+        previewの表示
       </div>
     </div>
+    </>
   );
-};
+}
 
 export default InputPicture;
