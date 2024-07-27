@@ -43,12 +43,14 @@ function InputPicture(){
         reader.readAsDataURL(file);
       }
 
-
     }
+    const handleGoOutputMusic = () => {
+      navigate('/output'); // ボタンをクリックしたときに /page2 へナビゲート
+    };
     return (
         <>
     <div style={{ 
-      backgroundImage: `url(${inputBackGround})`,
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${inputBackGround})`,
       height: '100vh',
       width: '100vw',
       backgroundSize: 'cover',
@@ -65,6 +67,7 @@ function InputPicture(){
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
     }}>
     
+
      <h1>Input Picture</h1>
      <form onSubmit={handlePicture} encType='multipart/form-data'>
       <input 
@@ -73,14 +76,14 @@ function InputPicture(){
       ref={pictureFileRef}
       onChange={handleFileInputChange}
       ></input>
-      <button type='submit'>写真を追加</button>
+      <button onClick={handleGoOutputMusic} type='submit' disabled={!selectedFile}>写真を追加</button>
       </form>
 
       <div
       style={{
         width: "600px",
         height: "400px",
-        border: "2px dashed #000",
+        border: "2px dashed #ccc",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -89,11 +92,12 @@ function InputPicture(){
         backgroundPosition: "center",
         marginBottom: "20px",
         backgroundImage: formDataURL ? `url(${formDataURL})` : "none"}}>
-        previewの表示
       </div>
+
     </div>
     </>
   );
 }
 
 export default InputPicture;
+
