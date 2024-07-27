@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
 import React from 'react';
 import outputBackGround from "./img/output.png";
+import './App.css'
 const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
   const [musics, setMusic] = useState([{ id: 1, name: 'music1' }]);
+  const [isPlaying, setIsPlaying] = useState(false); // アイコンの状態を管理するためのステート
   const musicNameRef = useRef();
 
   const handleMusic = () => {
@@ -14,9 +16,13 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
     musicNameRef.current.value = null;
   };
 
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <div style={{ 
-      backgroundImage: `url(${outputBackGround})`,
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${outputBackGround})`,
       height: '100vh',
       width: '100vw',
       backgroundSize: 'cover',
@@ -34,14 +40,37 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
     }}>
 
       <h1>Output Music</h1>
-      <input type="text" ref={musicNameRef}></input>
-      <button onClick={handleMusic}>音楽が流れる</button>
-      <button onClick={handleGoHome}>Go to Home</button>
-      <button onClick={handleGoInputPicture}>Go to Input</button>
+      <br/>
+      <br/>
+      <br/>      <br/>
+      <br/>
+      <br/>
+      <button 
+        className={`play-button ${isPlaying ? 'playing' : 'paused'}`} 
+        onClick={togglePlayPause}
+      >
+        {/* 背景アイコン */}
+        <i className={`fas ${isPlaying ? 'fa-circle-stop' : 'fa-circle'} play-button-background`}></i>
+        {/* 前景アイコン */}
+        <i className={`fas ${isPlaying ? 'fa-stop' : 'fa-play'} play-button-overlay`}></i>
+      </button>
+
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>      <br/>
+      <br/>
+      <br/>
+
+      <div className="button-container">
+      <button onClick={handleGoInputPicture}>もう一度</button>
+        <button onClick={handleGoHome}>終わる</button>
+
+      </div>
       <ul>
-        {musics.map((music) => (
-          <li key={music.id}>{music.name}</li>
-        ))}
+
       </ul>
     </div>
   );

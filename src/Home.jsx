@@ -5,7 +5,7 @@ import logo from './img/logo.png'
 const Home = ({handleGoInputPicture, handleGoOutputMusic}) => {
     return (
       <div style={{ 
-        backgroundImage: `url(${background})`,
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${background})`,
         height: '100vh',
         width: '100vw',
         backgroundSize: 'cover',
@@ -22,8 +22,7 @@ const Home = ({handleGoInputPicture, handleGoOutputMusic}) => {
         textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
       }}>
        <img src={logo} alt="Logo" style={{ height: '300px', marginBottom: '20px' }} /> {/* ロゴ画像を追加 */}
-      <button onClick={handleGoInputPicture}>Start now</button>
-
+      <button className="buttonNeumorphism"  onClick={handleGoInputPicture}>Start</button>
       </div>
     );
   };
