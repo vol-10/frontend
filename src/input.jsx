@@ -43,8 +43,10 @@ function InputPicture(){
         reader.readAsDataURL(file);
       }
 
-
     }
+    const handleGoOutputMusic = () => {
+      navigate('/output'); // ボタンをクリックしたときに /page2 へナビゲート
+    };
     return (
         <>
     <div style={{ 
@@ -74,14 +76,14 @@ function InputPicture(){
       ref={pictureFileRef}
       onChange={handleFileInputChange}
       ></input>
-      <button type='submit'>写真を追加</button>
+      <button onClick={handleGoOutputMusic} type='submit' disabled={!selectedFile}>写真を追加</button>
       </form>
 
       <div
       style={{
         width: "600px",
         height: "400px",
-        border: "2px dashed #000",
+        border: "2px dashed #ccc",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -90,7 +92,6 @@ function InputPicture(){
         backgroundPosition: "center",
         marginBottom: "20px",
         backgroundImage: formDataURL ? `url(${formDataURL})` : "none"}}>
-        previewの表示
       </div>
 
     </div>
@@ -99,3 +100,4 @@ function InputPicture(){
 }
 
 export default InputPicture;
+

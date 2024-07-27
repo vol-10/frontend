@@ -100,9 +100,20 @@ button:focus-visible {
   color: #222;
   background-color: #efefef;
   border-radius: 50%;
-  box-shadow: -4px -4px 8px #fff, 4px 4px 8px rgb(0 0 0 / 24%);
+
+  transition: box-shadow 0.3s ease-in-out;
+}
+.buttonNeumorphism:hover {
+  box-shadow: 
+  -8px -8px 16px rgba(255, 255, 255, 0.9), 
+  8px 8px 16px rgba(0, 0, 0, 0.6);
 }
 
+.buttonNeumorphism:active {
+  box-shadow: 
+    inset 4px 4px 8px rgba(0, 0, 0, 0.1), 
+    inset -4px -4px 8px rgba(255, 255, 255, 0.2);
+}
 
 /* アイコンのスタイル */
 .circle-button {
@@ -149,28 +160,38 @@ button:focus-visible {
 }
 
 .play-button {
-  position: relative;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 10rem; /* アイコンのサイズを調整 */
+  font-size: 2rem; /* アイコンのサイズを調整 */
   color: #fff;
   width: 50px;
   height: 50px;
-  border-radius: 50%; /* 円形にする */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.play-button::before {
-  content: '';
-  position: absolute;
-  width: 100px; /* 中央の円のサイズを調整 */
-  height: 100px;
-  background-color: #131111; /* 中央の円の色を設定 */
+.play-button.playing {
+  color: #070707;
+}
 
-  z-index: -1; /* アイコンの後ろに配置 */
+.play-button.paused {
+  /* 一時停止中のスタイル */
+}
+
+.play-button-background {
+  font-size: 20rem; /* 背景アイコンのサイズ */
+  color: #131111; /* 背景アイコンの色 */
+  position: absolute;
+  z-index: 1; /* 背景アイコンが後ろに */
+}
+
+.play-button-overlay {
+  font-size: 10rem; /* 前景アイコンのサイズ */
+  color: #fff; /* 前景アイコンの色 */
+  position: relative;
+  z-index: 2; /* 前景アイコンが前に */
 }
 
 @media (prefers-color-scheme: light) {

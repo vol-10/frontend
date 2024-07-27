@@ -4,6 +4,7 @@ import outputBackGround from "./img/output.png";
 import './App.css'
 const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
   const [musics, setMusic] = useState([{ id: 1, name: 'music1' }]);
+  const [isPlaying, setIsPlaying] = useState(false); // アイコンの状態を管理するためのステート
   const musicNameRef = useRef();
 
   const handleMusic = () => {
@@ -13,6 +14,10 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
       return [...prevMusics, { id: prevMusics.length + 1, name: musicName }];
     });
     musicNameRef.current.value = null;
+  };
+
+  const togglePlayPause = () => {
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -35,11 +40,27 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
     }}>
 
       <h1>Output Music</h1>
-     
-      <button className="play-button" onClick={handleMusic}>
-      <i className="fas fa-circle-play"></i></button>
+      <br/>
+      <br/>
+      <br/>      <br/>
+      <br/>
+      <br/>
+      <button 
+        className={`play-button ${isPlaying ? 'playing' : 'paused'}`} 
+        onClick={togglePlayPause}
+      >
+        {/* 背景アイコン */}
+        <i className={`fas ${isPlaying ? 'fa-circle-stop' : 'fa-circle'} play-button-background`}></i>
+        {/* 前景アイコン */}
+        <i className={`fas ${isPlaying ? 'fa-stop' : 'fa-play'} play-button-overlay`}></i>
+      </button>
 
       <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>      <br/>
       <br/>
       <br/>
 
