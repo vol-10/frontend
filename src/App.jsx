@@ -32,9 +32,9 @@ function App() {
       </div>
 
       <Routes>
-      <Route path={"/"} element={<Home />}/>
-        <Route path="/input" element={InputPicture()} />
-        <Route path="/output" element={OutputMusic()} />
+        <Route path={"/"} element={<Home />}/>
+        <Route path="/input" element={<InputPicture></InputPicture>} />
+        <Route path="/output" element={<OutputMusic></OutputMusic>} />
       </Routes>
 
     </>
