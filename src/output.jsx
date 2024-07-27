@@ -2,14 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 import outputBackGround from "./img/output.png";
 import { useParams } from 'react-router-dom';
+import './App.css';
 
-import './App.css'
-const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
+const OutputMusic = ({ handleGoHome, handleGoInputPicture }) => {
   const { filename } = useParams();
   const [emotion, setEmotion] = useState(null);
-  const [musics, setMusic] = useState([{ id: 1, name: 'music1' }]);
-  const [isPlaying, setIsPlaying] = useState(false); // アイコンの状態を管理するためのステート
-  const musicNameRef = useRef();
+  const [bgm, setBgm] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const fetchEmotion = async () => {
@@ -25,18 +25,36 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
         console.error('Error:', error);
       }
     };
+
     fetchEmotion();
   }, [filename]);
-  const handleMusic = () => {
-    const musicName = musicNameRef.current.value;
-    if (musicName.trim() === '') return; // 空の入力を防ぐ
-    setMusic((prevMusics) => {
-      return [...prevMusics, { id: prevMusics.length + 1, name: musicName }];
-    });
-    musicNameRef.current.value = null;
-  };
+
+  useEffect(() => {
+    const fetchBgm = async () => {
+      if (emotion) {
+        try {
+          const response = await fetch(`http://127.0.0.1:5000/bgm/${emotion}`);
+          const data = await response.json();
+          if (response.ok) {
+            setBgm(`http://127.0.0.1:5000/static/sounds/${data.bgm}`);
+          } else {
+            console.error(data.error);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    };
+
+    fetchBgm();
+  }, [emotion]);
 
   const togglePlayPause = () => {
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play();
+    }
     setIsPlaying(!isPlaying);
   };
 
@@ -58,40 +76,19 @@ const OutputMusic=({ handleGoHome, handleGoInputPicture }) =>{
       color: '#fff',
       textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
     }}>
-
       <h1>Output Music</h1>
-      <br/>
-      <br/>
-      <br/>      <br/>
-      <br/>
-      <br/>
       <button 
         className={`play-button ${isPlaying ? 'playing' : 'paused'}`} 
         onClick={togglePlayPause}
       >
-        {/* 背景アイコン */}
         <i className={`fas ${isPlaying ? 'fa-circle-stop' : 'fa-circle'} play-button-background`}></i>
-        {/* 前景アイコン */}
         <i className={`fas ${isPlaying ? 'fa-stop' : 'fa-play'} play-button-overlay`}></i>
       </button>
-
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>      <br/>
-      <br/>
-      <br/>
-
       <div className="button-container">
-      <button onClick={handleGoInputPicture}>もう一度</button>
+        <button onClick={handleGoInputPicture}>もう一度</button>
         <button onClick={handleGoHome}>終わる</button>
-
       </div>
-      <ul>
-
-      </ul>
+      {bgm && <audio ref={audioRef} src={bgm} />}
       {emotion ? <p>Detected Emotion: {emotion}</p> : <p>Loading...</p>}
     </div>
   );
