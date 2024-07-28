@@ -142,8 +142,8 @@ function InputPicture(){
 
       <div
           style={{
-            width: "600px",
-            height: "400px",
+            width: "750px",
+            height: "500px",
             border: "2px dashed #ccc",
             display: "flex",
             justifyContent: "center",
@@ -162,7 +162,7 @@ function InputPicture(){
         </div>
         {cameraActive ? (
           <>
-            <video ref={videoRef} style={{ width: "600px", height: "400px" }}></video>
+            <video ref={videoRef} style={{ width: "750px", height: "500px" }}></video>
             <button onClick={handleCapturePhoto}>写真を撮る</button>
             <button onClick={handleStopCamera}>カメラを停止</button>
           </>
