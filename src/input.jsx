@@ -137,7 +137,7 @@ function InputPicture(){
       ref={pictureFileRef}
       onChange={handleFileInputChange}
       ></input>
-      <button onClick={handleGoOutputMusic} type='submit' disabled={!selectedFile}>写真を追加</button>
+      <button type='submit' disabled={!selectedFile}>写真を追加</button>
       </form>
 
       <div

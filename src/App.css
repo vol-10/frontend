@@ -88,7 +88,12 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
+.logo {
+  height: 300px;
+  margin-bottom: 60px;
+  border-radius: 50%; /* 枠を丸い形にする */
+  background-color: transparent; /* 背景を透過にする（画像自体が透過背景を持っていることを前提とする） */
+}
 
 /* ボタンのスタイル */
 .buttonNeumorphism {
